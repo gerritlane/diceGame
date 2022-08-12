@@ -65,6 +65,15 @@ body {
 	width: min(35px, 5vw);
 }
 
+.roll {
+	font-size: 5rem;
+	margin: 20px;
+	border-radius: 25px;
+	padding: min(1rem,1.5vw);
+	color: var(--color-dark);
+	background-color: var(--color-light);
+}
+
 .footer {
 	font-family: 'Roboto', sans-serif;
 	color: var(--color-darkRed);

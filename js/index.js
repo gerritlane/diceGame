@@ -1,4 +1,4 @@
-function displayNum (dieNum) {
+function displayNum (dieNum, player) {
 	let dieArray = [
 		[0,0,0],
 		[0,0,0],
@@ -56,11 +56,11 @@ function displayNum (dieNum) {
 			]
 		}
 	console.log(dieArray)
-	
+
 	//Reset all dice dots
 	for (let i = 0; i < dieArray.length; i++) {
 		for (let j = 0; j < dieArray[i].length; j++) {
-			document.querySelector(`.die :nth-child(${i+1}) :nth-child(${j+1})`).classList.add("blank")
+			document.querySelector(`.${player}.die :nth-child(${i+1}) :nth-child(${j+1})`).classList.add("blank")
 		}
 	}
 
@@ -68,9 +68,33 @@ function displayNum (dieNum) {
 	for (let i = 0; i < dieArray.length; i++) {
 		for (let j = 0; j < dieArray[i].length; j++) {
 			if (dieArray[i][j] === 1) {
-				document.querySelector(`.die :nth-child(${i+1}) :nth-child(${j+1})`).classList.remove("blank")
+				document.querySelector(`.${player}.die :nth-child(${i+1}) :nth-child(${j+1})`).classList.remove("blank")
 			}
 		}
 	}
 	
 }
+
+function chooseWinner (playerOneRoll, playerTwoRoll) {
+	if (playerOneRoll === playerTwoRoll) {
+		document.querySelector('.header').textContent = "🚩Tie🚩";
+	}
+	else if (playerOneRoll > playerTwoRoll) {
+		document.querySelector('.header').textContent = "🚩Player 1 Wins!";
+	}
+	else {
+		document.querySelector('.header').textContent = " Player 2 Wins!🚩";
+	}
+}
+
+function roll () {
+	let playerOneRoll = Math.floor(Math.random() * 6) + 1;
+	let playerTwoRoll = Math.floor(Math.random() * 6) + 1;
+	displayNum(playerOneRoll, "left");
+	displayNum(playerTwoRoll, "right");
+	chooseWinner(playerOneRoll, playerTwoRoll)
+}
+
+// Make roll button roll dice
+document.querySelector('.roll').addEventListener("click", roll);
+
